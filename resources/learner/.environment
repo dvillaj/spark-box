@@ -1,0 +1,10 @@
+export PGHOST=localhost
+export PGUSER=postgres
+export PGPASSWORD=postgres
+
+alias postgres="docker-compose -f /home/learner/compose-postgres/docker-compose.yml"
+alias riak="docker-compose -f /home/learner/compose-riak/docker-compose.yml"
+alias riak-admin="docker exec -it compose-riak_coordinator_1 riak-admin"
+alias cassandra="docker-compose -f /home/learner/compose-cassandra/docker-compose.yml"
+alias mongodb="docker-compose -f /home/learner/compose-mongodb/docker-compose.yml"
+alias neo4j="docker-compose -f /home/learner/compose-neo4j/docker-compose.yml"
