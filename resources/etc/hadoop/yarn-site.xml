@@ -1,0 +1,23 @@
+<configuration>
+<!-- Site specific YARN configuration properties -->
+    <property>
+	<name>yarn.resourcemanager.hostname</name>
+	<value>0.0.0.0</value>
+    </property>
+    <property>
+	<name>yarn.nodemanager.aux-services</name>
+	<value>mapreduce_shuffle</value>
+    </property>
+    <property>
+	<name>yarn.nodemanager.resource.memory-mb</name>
+	<value>16256</value>
+    </property>
+    <property>
+	<name>yarn.app.mapreduce.am.resource.mb</name>
+	<value>4096</value>
+    </property>
+    <property>
+	<name>yarn.scheduler.minimum-allocation-mb</name>
+	<value>4096</value>
+    </property>
+</configuration>

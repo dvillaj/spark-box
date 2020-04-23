@@ -1,0 +1,3 @@
+CREATE DATABASE metastore;
+CREATE USER 'hive'@'%' IDENTIFIED BY 'PW_FOR_HIVE';
+GRANT ALL ON metastore.* TO 'hive'@'%' WITH GRANT OPTION;
