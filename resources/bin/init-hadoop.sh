@@ -5,5 +5,4 @@ hdfs dfs -mkdir -p /user/hive/warehouse
 hdfs dfs -chmod -R a+rw /user/hive
 
 # Hive
-schematool -dbType mysql -initSchema
-hive --service metastore
+schematool --verbose -dbType mysql -initSchema

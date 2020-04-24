@@ -1,0 +1,34 @@
+version: "3.3"
+networks:
+  spark-network:
+services:
+  spark-master:
+    build: .
+    container_name: spark-master
+    hostname: spark-master
+    command: >
+      /bin/sh -c '
+      /spark/sbin/start-master.sh
+      && tail -f /spark/logs/*'
+    ports:
+      - 8080:8080
+      - 7077:7077
+    networks:
+      - spark-network
+  spark-worker:
+    build: .
+    depends_on:
+      - spark-master
+    command: >
+      /bin/sh -c '
+      /spark/sbin/start-slave.sh $$SPARK_MASTER
+      && tail -f /spark/logs/*'
+    env_file:
+      - spark-worker.env
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_WORKER_WEBUI_PORT=8080
+    ports:
+      - 8080
+    networks:
+      - spark-network
