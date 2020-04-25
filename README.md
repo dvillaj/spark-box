@@ -24,7 +24,8 @@ init-all.sh
 
 ## Integration Test
 
-./notebooks/Integration_Test.ipynb
+
+[Integration_Test.ipynb](./resources/notebooks/Integration_Test.ipynb)
 
 
 ## Jupyter Lab
