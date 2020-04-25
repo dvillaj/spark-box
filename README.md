@@ -1,8 +1,21 @@
 # NoSQL Box
 
-Vagrant to create a Spark box following this [article](https://towardsdatascience.com/tutorial-building-your-own-big-data-infrastructure-for-data-science-579ae46880d8) from Ashton Sidhu
+Vagrant to create a virtual machine following this [article](https://towardsdatascience.com/tutorial-building-your-own-big-data-infrastructure-for-data-science-579ae46880d8) of Ashton Sidhu
  
-This box is based in Ubuntu 18.04 and Docker.
+
+## Installed Software 
+
+This box is based in Ubuntu 18.04 and docker.
+
+The build process will install and configure the following software:
+
+- [Hadoop](http://localhost:9870)
+- [Yarn](http://localhost:8088)
+- Hive
+- [Spark](http://localhost:8080)
+- MySQL
+- [Jupyter Lab](http://localhost:8888)
+
 
 ## Build the box
 
@@ -28,20 +41,3 @@ init-all.sh
 [Integration_Test.ipynb](./resources/notebooks/Integration_Test.ipynb)
 
 
-## Jupyter Lab
-
-http://localhost:8888
-
-
-### Spark 
-
-http://localhost:8080
-
-
-### Hadoop 
-
-http://localhost:9870
-
-### Yarn
-
-http://localhost:8088
