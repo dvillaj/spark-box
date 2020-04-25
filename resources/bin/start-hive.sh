@@ -1,1 +1,1 @@
-hive --service metastore &
+hive --service metastore >/dev/null 2>&1 &
