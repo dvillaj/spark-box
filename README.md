@@ -1,13 +1,12 @@
 # NoSQL Box
 
-Vagrant to create a virtual machine following this [turorial](https://towardsdatascience.com/tutorial-building-your-own-big-data-infrastructure-for-data-science-579ae46880d8) of how build your own Big data Infrastructure for Data Science written by Ashton Sidhu
- 
+Automatization of "Building your Own Big Data Infrastructure for Data Science" article written by [Ashton Sidhu](https://towardsdatascience.com/tutorial-building-your-own-big-data-infrastructure-for-data-science-579ae46880d8)
 
-## Installed Software 
 
-This box is based in Ubuntu 18.04 and docker.
+## Software 
 
-The build process will install and configure the following software:
+
+The build process uses Vagrant to create a virtual machine with Ubuntu 18.10 and install the following software:
 
 - [Hadoop](http://localhost:9870)
 - [Yarn](http://localhost:8088)
@@ -15,6 +14,7 @@ The build process will install and configure the following software:
 - [Spark](http://localhost:8080)
 - MySQL
 - [Jupyter Lab](http://localhost:8888)
+- Docker
 
 
 ## Build the box
