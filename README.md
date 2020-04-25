@@ -1,6 +1,6 @@
 # NoSQL Box
 
-Vagrant to create a virtual machine following this [article](https://towardsdatascience.com/tutorial-building-your-own-big-data-infrastructure-for-data-science-579ae46880d8) of Ashton Sidhu
+Vagrant to create a virtual machine following this [turorial](https://towardsdatascience.com/tutorial-building-your-own-big-data-infrastructure-for-data-science-579ae46880d8) of how build your own Big data Infrastructure for Data Science written by Ashton Sidhu
  
 
 ## Installed Software 
