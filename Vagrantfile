@@ -115,9 +115,9 @@ EOF
   sudo sed -i "s/YOUR_SPARK_VERSION/$SPARK_VERSION/" /opt/spark-cluster/Dockerfile
 
   sudo apt update
-  sudo apt install -y python3-pip
+  sudo apt install -y python3-pip default-libmysqlclient-dev
 
-  sudo pip3 install jupyterlab pandas ipython-sql pymysql matplotlib pyspark==${SPARK_VERSION}
+  sudo pip3 install jupyterlab pandas ipython-sql mysqlclient matplotlib pyspark==${SPARK_VERSION}
 
   sudo su - vagrant -c "cd; jupyter lab --generate-config"
   sudo sed -i "s/#c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip = '0.0.0.0'/" /home/vagrant/.jupyter/jupyter_notebook_config.py
@@ -126,7 +126,13 @@ EOF
   echo "c.NotebookApp.nbserver_extensions.append('ipyparallel.nbextension')" | sudo tee -a /home/vagrant/.jupyter/jupyter_notebook_config.py
 
   sudo -H -u vagrant bash -c 'cd /opt/spark-cluster && docker-compose build'
+
+
+  sudo mkdir -p /home/vagrant/notebooks
+  sudo cp /home/vagrant/resources/notebooks/* /home/vagrant/notebooks
+  sudo chown vagrant:vagrant /home/vagrant/notebooks
   sudo rm -rf /home/vagrant/resources
+
 SCRIPT
 
 
@@ -160,6 +166,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 8080, host: 8080, id: 'spark-ui'
   config.vm.network :forwarded_port, guest: 9870, host: 9870, id: 'hadoop'
   config.vm.network :forwarded_port, guest: 8088, host: 8088, id: 'yarn'
+  config.vm.network :forwarded_port, guest: 3306, host: 3306, id: 'mysql'
   config.vm.network :forwarded_port, guest: 22, host: 2244, id: 'ssh'
 
   config.vm.provision "file", source: "resources", destination: "/home/vagrant/resources"

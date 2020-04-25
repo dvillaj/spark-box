@@ -1,0 +1,1 @@
+schematool --verbose -dbType mysql -initSchema
