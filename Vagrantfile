@@ -151,14 +151,11 @@ Vagrant.configure("2") do |config|
 
 
   # ssh settings
-  config.ssh.insert_key = false
-  config.ssh.private_key_path = ["~/.ssh/id_rsa", "#{ENV['VAGRANT_HOME']}/insecure_private_key"]
-  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
-
-  # Private Key
-  config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "/home/vagrant/.ssh/id_rsa"
-  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
-  config.vm.provision "shell", inline: "chmod 400 /home/vagrant/.ssh/id_rsa"
+  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/me.pub"
+  config.vm.provision "shell", inline: <<-SHELL
+    cat /home/vagrant/.ssh/me.pub >> /home/vagrant/.ssh/authorized_keys
+    rm /home/vagrant/.ssh/me.pub
+  SHELL
 
   # Ports
   config.vm.network :forwarded_port, guest: 8888, host: 8888, id: 'jupyter'
