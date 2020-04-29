@@ -37,6 +37,7 @@ $script_hadoop = <<-SCRIPT
   sudo apt update
   sudo apt install -y -qq openjdk-8-jdk
 
+  sudo -H -u vagrant bash -c 'cd; cat /dev/zero | ssh-keygen -q -N ""'
   cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
   cat << EOF >> /home/vagrant/.bashrc
 
@@ -100,8 +101,6 @@ EOF
 
   sudo sed -i "s/127.0.0.1/$LOCAL_IP/" /etc/mysql/mysql.conf.d/mysqld.cnf
   sudo systemctl restart mysql.service
-
-  # sudo -H -u vagrant bash -c 'whoami && echo "Inicializate Hadoop ..." && source /home/vagrant/.bashrc && pwd && echo $HADOOP_HOME &  echo $PATH && init-hadoop.sh'
 
   sudo mkdir -p /opt/spark-cluster
   sudo cp /home/vagrant/resources/spark/cluster/* /opt/spark-cluster
@@ -170,7 +169,3 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: $script_hadoop
 
 end
-
-=begin
-
-=end
