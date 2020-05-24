@@ -1,23 +1,5 @@
 $script_hadoop = <<-SCRIPT
 
-  export MYSQL_ROOT_PASSWD="UvwKXqnrfn27CNVz"
-  export MYSQL_HIVE_PASSWD="3MX6fDLN2AQm23bD"
-  export LOCAL_IP=`hostname -I | xargs`
-  export SPARK_VERSION=2.4.5
-  export SPARK_HADOOP_VERSION=2.7
-  export HIVE_VERSION=3.1.2
-  export HADOOP_VERSION=3.1.3
-  export DOCKER_COMPOSE_VERSION=1.25.4
-
-  sudo apt update
-  sudo apt install -y -qq apt-transport-https ca-certificates curl software-properties-common
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-  sudo apt install -y docker-ce
-  sudo usermod -aG docker vagrant
-
-  sudo curl -sL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-  sudo chmod +x /usr/local/bin/docker-compose
 
   wget -q https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz
   sudo tar -C /opt -xzf hadoop-${HADOOP_VERSION}.tar.gz
@@ -138,11 +120,11 @@ SCRIPT
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "bento/ubuntu-18.04"
+  config.vm.box = "ubuntu/bionic64"
   config.vm.box_check_update = false
 
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "Spark Box"
+    vb.name = "BigData Box"
   
     vb.cpus = 2
     vb.memory = 8048
@@ -156,16 +138,92 @@ Vagrant.configure("2") do |config|
     rm /home/vagrant/.ssh/me.pub
   SHELL
 
-  # Ports
-  config.vm.network :forwarded_port, guest: 8888, host: 8888, id: 'jupyter'
-  config.vm.network :forwarded_port, guest: 7077, host: 7077, id: 'spark-app'
-  config.vm.network :forwarded_port, guest: 8080, host: 8080, id: 'spark-ui'
-  config.vm.network :forwarded_port, guest: 9870, host: 9870, id: 'hadoop'
-  config.vm.network :forwarded_port, guest: 8088, host: 8088, id: 'yarn'
-  config.vm.network :forwarded_port, guest: 3306, host: 3306, id: 'mysql'
-  config.vm.network :forwarded_port, guest: 22, host: 2244, id: 'ssh'
+  config.vm.network :private_network, ip: "10.211.55.101"
 
-  config.vm.provision "file", source: "resources", destination: "/home/vagrant/resources"
-  config.vm.provision "shell", inline: $script_hadoop
+  config.vm.synced_folder "src/", "/src"
+
+  # Ports
+  #config.vm.network :forwarded_port, guest: 8888, host: 8888, id: 'jupyter'
+  #config.vm.network :forwarded_port, guest: 7077, host: 7077, id: 'spark-app'
+  #config.vm.network :forwarded_port, guest: 8080, host: 8080, id: 'spark-ui'
+  config.vm.network :forwarded_port, guest: 50070, host: 50070, id: 'hadoop'
+  config.vm.network :forwarded_port, guest: 8088, host: 8088, id: 'yarn'
+  #config.vm.network :forwarded_port, guest: 3306, host: 3306, id: 'mysql'
+  #config.vm.network :forwarded_port, guest: 22, host: 2244, id: 'ssh'
+
+  config.vm.provision "shell", path: "scripts/setup-docker.sh"
+  config.vm.provision "shell", path: "scripts/setup-hadoop.sh"
+
+  #config.vm.provision "file", source: "resources", destination: "/home/vagrant/resources"
+  #config.vm.provision "shell", inline: $script_hadoop
 
 end
+
+
+
+=begin
+
+
+node.vm.provider "virtualbox" do |v|
+  v.name = "node#{i}"
+  v.customize ["modifyvm", :id, "--memory", "4096"]
+      end
+node.vm.network :private_network, ip: "10.211.55.10#{i}"
+node.ssh.insert_key = false
+      
+      node.vm.hostname = "node#{i}"
+      node.vm.provision "shell", path: "scripts/setup-centos.sh"
+node.vm.provision "shell" do |s|
+  s.path = "scripts/setup-centos-hosts.sh"
+  s.args = "-t #{numNodes}"
+end
+
+node.vm.provision "shell", path: "scripts/setup-java.sh"
+node.vm.provision "shell", path: "scripts/setup-hadoop.sh"
+
+if i == 2
+  node.vm.provision "shell" do |s|
+    s.path = "scripts/setup-centos-ssh.sh"
+    s.args = "-s 3 -t #{numNodes}"
+  end
+
+  node.vm.provision "shell", path: "scripts/setup-hive.sh"
+      end
+
+if i == 1
+  node.vm.provision "shell" do |s|
+    s.path = "scripts/setup-centos-ssh.sh"
+    s.args = "-s 2 -t #{numNodes}"
+  end
+ 
+  node.vm.provision "shell" do |s|
+    s.path = "scripts/setup-mysql.sh"
+    s.args = "10.211.55.10#{i}"
+  end
+
+  node.vm.provision "shell", path: "scripts/setup-python.sh"
+
+      end
+ 
+node.vm.provision "shell" do |s|
+  s.path = "scripts/setup-hadoop-slaves.sh"
+  s.args = "-s 3 -t #{numNodes}"
+end
+
+node.vm.provision "shell", path: "scripts/setup-spark.sh"
+node.vm.provision "shell" do |s|
+  s.path = "scripts/setup-spark-slaves.sh"
+  s.args = "-s 3 -t #{numNodes}"
+      end
+
+if i < 3
+  node.vm.provision "shell" do |s|
+    s.path = "scripts/setup-cluster.sh"
+    s.args = "-n #{i}"
+  end
+end
+
+
+yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar pi 2 100
+
+=end

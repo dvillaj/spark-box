@@ -1,0 +1,35 @@
+version: '3'
+services:
+
+  hadoop-slave1:
+    image: dvillaj/hadoop-cluster-base
+    build:
+      context: base
+    networks:
+      - hadoop
+
+  hadoop-slave2:
+    image: dvillaj/hadoop-cluster-base
+    networks:
+      - hadoop
+
+  hadoop-master:
+    image: dvillaj/hadoop-cluster-master
+    build:
+      context: master
+    networks:
+      - hadoop
+    ports:
+      - 50070:50070
+      - 8088:8088
+      - 9000:9000      
+    depends_on:
+      - hadoop-slave1
+      - hadoop-slave2
+    volumes:
+       - ./data:/data     
+      
+networks:
+  hadoop:
+    driver: bridge
+
