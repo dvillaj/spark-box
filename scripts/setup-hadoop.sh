@@ -30,24 +30,19 @@ function setupHadoopCluster {
   	cp -r $RESOURCES_DIR/hadoop/cluster/* /opt/hadoop-cluster
 
   	sudo -H -u vagrant bash -c 'cd /opt/hadoop-cluster && docker-compose build && docker-compose up -d'
+
+	sleep 3
 }
 
 function configureHadoopCluster {
 
 	echo "configuring hadoop cluster"
 
-	echo 1
 	source "/vagrant/resources/hadoop/config/hadoop.sh"
-	echo 2
 	source "/vagrant/resources/hadoop/config/java.sh"
 
-	echo 3
 	hadoop fs -mkdir -p /user/root
-
-	echo 4
 	hadoop fs -mkdir -p /user/vagrant
-
-	echo 5
 	hadoop fs -chown vagrant:vagrant /user/vagrant
 }
 
@@ -58,4 +53,6 @@ installJava
 installHadoop
 setupHadoop
 setupHadoopCluster
+
+
 configureHadoopCluster
