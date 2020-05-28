@@ -143,16 +143,17 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "src/", "/src"
 
   # Ports
-  #config.vm.network :forwarded_port, guest: 8888, host: 8888, id: 'jupyter'
-  #config.vm.network :forwarded_port, guest: 7077, host: 7077, id: 'spark-app'
-  #config.vm.network :forwarded_port, guest: 8080, host: 8080, id: 'spark-ui'
+  config.vm.network :forwarded_port, guest: 8888, host: 8888, id: 'jupyter'
+  config.vm.network :forwarded_port, guest: 7077, host: 7077, id: 'spark-app'
+  config.vm.network :forwarded_port, guest: 8080, host: 8080, id: 'spark-ui'
   config.vm.network :forwarded_port, guest: 50070, host: 50070, id: 'hadoop'
   config.vm.network :forwarded_port, guest: 8088, host: 8088, id: 'yarn'
-  #config.vm.network :forwarded_port, guest: 3306, host: 3306, id: 'mysql'
-  #config.vm.network :forwarded_port, guest: 22, host: 2244, id: 'ssh'
+  config.vm.network :forwarded_port, guest: 3306, host: 3306, id: 'mysql'
+  config.vm.network :forwarded_port, guest: 22, host: 2244, id: 'ssh'
 
   config.vm.provision "shell", path: "scripts/setup-docker.sh"
   config.vm.provision "shell", path: "scripts/setup-hadoop.sh"
+  config.vm.provision "shell", path: "scripts/setup-spark.sh"
 
   #config.vm.provision "file", source: "resources", destination: "/home/vagrant/resources"
   #config.vm.provision "shell", inline: $script_hadoop
@@ -225,5 +226,8 @@ end
 
 
 yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar pi 2 100
+
+beeline -u jdbc:hive2://localhost:10000/
+
 
 =end

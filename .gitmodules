@@ -1,0 +1,3 @@
+[submodule "resources/hadoop/cluster"]
+	path = resources/hadoop/cluster
+	url = git@github.com:dvillaj/hadoop-from-scratch.git

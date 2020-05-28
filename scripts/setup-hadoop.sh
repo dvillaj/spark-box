@@ -9,7 +9,7 @@ function installJava {
 }
 
 function installHadoop {
-	echo "install hadoop from remote file"
+	echo "installing hadoop"
 
 	wget --quiet http://apache.rediris.es/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz
     tar -xzf hadoop-${HADOOP_VERSION}.tar.gz -C /usr/local
@@ -18,9 +18,9 @@ function installHadoop {
 }
 
 function setupHadoop {
-	echo "copying over hadoop configuration files"
+	echo "setup hadoop"
 
-	cp -f $RESOURCES_DIR/hadoop/config/*.xml /usr/local/hadoop//etc/hadoop
+	cp -f $RESOURCES_DIR/hadoop/config/*.xml /usr/local/hadoop/etc/hadoop
 	cp -f $RESOURCES_DIR/hadoop/config/hadoop.sh /etc/profile.d
 }
 
@@ -29,7 +29,7 @@ function setupHadoopCluster {
   	mkdir -p /opt/hadoop-cluster
   	cp -r $RESOURCES_DIR/hadoop/cluster/* /opt/hadoop-cluster
 
-  	sudo -H -u vagrant bash -c 'cd /opt/hadoop-cluster && docker-compose build && docker-compose up -d'
+  	#sudo -H -u vagrant bash -c 'cd /opt/hadoop-cluster && docker-compose build && docker-compose up -d'
 
 	sleep 3
 }
@@ -41,9 +41,11 @@ function configureHadoopCluster {
 	source "/vagrant/resources/hadoop/config/hadoop.sh"
 	source "/vagrant/resources/hadoop/config/java.sh"
 
-	hadoop fs -mkdir -p /user/root
-	hadoop fs -mkdir -p /user/vagrant
-	hadoop fs -chown vagrant:vagrant /user/vagrant
+	# hadoop fs -mkdir -p /user/root && hadoop fs -mkdir -p /user/vagrant && hadoop fs -chown vagrant:vagrant /user/vagrant
+	
+	#hadoop fs -mkdir -p /user/root
+	#hadoop fs -mkdir -p /user/vagrant
+	#hadoop fs -chown vagrant:vagrant /user/vagrant
 }
 
 
