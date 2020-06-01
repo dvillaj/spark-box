@@ -17,6 +17,12 @@ function setupSpark {
 	cp -f $RESOURCES_DIR/spark/config/*.sh /etc/profile.d
 }
 
+function setupPython {
+    pip3 install pyspark==${SPARK_VERSION}
+}
+
+
 echo "setup spark"
 installSpark
 setupSpark
+setupPython
