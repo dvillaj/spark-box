@@ -3,9 +3,6 @@ source "/vagrant/scripts/common.sh"
 
 function installPython3 {
     apt install -y python3-pip default-libmysqlclient-dev
-
-    echo "alias python=python3" >> /home/vagrant/.bashrc
-    echo "alias pip=pip3" >> /home/vagrant/.bashrc
 }
 
 function installPythonModules {
