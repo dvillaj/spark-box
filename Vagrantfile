@@ -47,4 +47,11 @@ yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.
 beeline -u jdbc:hive2://localhost:10000/
 
 
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.master("spark://localhost:7077").getOrCreate()
+sc = spark.sparkContext
+rdd = sc.parallelize(range(100 + 1))
+rdd.sum()
+
+
 =end
