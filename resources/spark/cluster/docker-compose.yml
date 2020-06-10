@@ -3,7 +3,11 @@ networks:
   spark-network:
 services:
   spark-master:
-    build: .
+    image: dvillaj/spark
+    build:
+      context: .
+      args:
+        SPARK_VERSION: 2.4.5
     container_name: spark-master
     hostname: spark-master
     command: >
@@ -16,7 +20,7 @@ services:
     networks:
       - spark-network
   spark-worker:
-    build: .
+    image: dvillaj/spark
     depends_on:
       - spark-master
     command: >

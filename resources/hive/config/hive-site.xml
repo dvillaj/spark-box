@@ -6,7 +6,7 @@
     </property>
     <property>
         <name>javax.jdo.option.ConnectionDriverName</name>
-        <value>com.mysql.jdbc.Driver</value>
+        <value>com.mysql.cj.jdbc.Driver</value>
         <description>MySQL JDBC driver class</description>
      </property>
      <property>
@@ -19,4 +19,23 @@
         <value>PW_FOR_HIVE</value>
         <description>password for connecting to mysql server</description>
      </property>
+     <property>
+      <name>hive.server2.thrift.port</name>
+      <value>10000</value>
+   </property>
+   <property>
+      <name>hive.server2.webui.port</name>
+      <value>10002</value>
+   </property>
+   <property>
+      <name>hive.metastore.port</name>
+      <value>9083</value>
+   </property>
+   <property>
+      <name>hive.server2.enable.doAs</name>
+      <value>false</value>
+      <description>
+         Setting this property to true will have HiveServer2 execute Hive operations as the user making the calls to it.
+      </description>
+   </property>
 </configuration>

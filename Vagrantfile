@@ -28,6 +28,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 9870, host: 9870, id: 'hadoop'
   config.vm.network :forwarded_port, guest: 8088, host: 8088, id: 'yarn'
   config.vm.network :forwarded_port, guest: 3306, host: 3306, id: 'mysql'
+  config.vm.network :forwarded_port, guest: 10002, host: 10002, id: 'hive'
   config.vm.network :forwarded_port, guest: 22, host: 2244, id: 'ssh'
 
 
@@ -39,3 +40,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "scripts/setup-common.sh"
 
 end
+
+
+=begin
+yarn jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.1.3.jar pi 2 100
+beeline -u jdbc:hive2://localhost:10000/
+=end
