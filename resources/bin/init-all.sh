@@ -1,4 +1,3 @@
-init-hadoop.sh
 start-hadoop.sh
 init-hive.sh
 start-hive.sh

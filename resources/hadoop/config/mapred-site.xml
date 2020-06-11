@@ -27,4 +27,16 @@
     	<name>mapreduce.reduce.memory.mb</name>
     	<value>4096</value>
     </property>
+    <property>
+    	<name>mapreduce.jobhistory.webapp.address</name>
+    	<value>0.0.0.0:19888</value>
+    </property>
+    <property>
+    	<name>mapreduce.jobhistory.intermediate-done-dir</name>
+    	<value>/app/hadoop//mr-history/tmp</value>
+    </property>
+    <property>
+    	<name>mapreduce.jobhistory.done-dir</name>
+    	<value>/app/hadoop//mr-history/done</value>
+    </property>
 </configuration>

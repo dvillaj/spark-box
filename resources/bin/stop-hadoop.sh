@@ -1,3 +1,3 @@
-stop-dfs.sh
+mr-jobhistory-daemon.sh stop historyserver
 stop-yarn.sh
-jps
+stop-dfs.sh

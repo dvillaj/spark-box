@@ -1,15 +1,15 @@
 <configuration>
     <property>
-	<name>dfs.replication</name>
-	<value>1</value>
-	<description>Default block replication.</description>
+		<name>dfs.replication</name>
+		<value>1</value>
+		<description>Default block replication.</description>
     </property>
     <property>
-	<name>dfs.name.dir</name>
-	<value>/app/hadoop/dfs/namenode</value>
-    </property>
+		<name>dfs.name.dir</name>
+		<value>/app/hadoop/dfs/namenode</value>
+	    </property>
     <property>
-	<name>dfs.data.dir</name>
-	<value>/app/hadoop/dfs/datanode</value>
+		<name>dfs.data.dir</name>
+		<value>/app/hadoop/dfs/datanode</value>
     </property>
 </configuration>
