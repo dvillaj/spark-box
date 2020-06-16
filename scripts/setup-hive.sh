@@ -24,20 +24,6 @@ function installMysqlConnector {
     rm -rf mysql-connector-java-8.0.19*
 }
 
-function setupHive {
-	echo "seting up hive"
-
-	cp -f $RESOURCES_DIR/hive/config/*.xml /opt/hive/conf
-    sed -i "s/YOUR_IP/$LOCAL_IP/" /opt/hive/conf/hive-site.xml
-    sed -i "s/PW_FOR_HIVE/$MYSQL_HIVE_PASSWD/" /opt/hive/conf/hive-site.xml
-
- 	cp -f $RESOURCES_DIR/hive/config/hive.sh /etc/profile.d
-
-    rm /opt/hive/lib/guava-19.0.jar
-    cp /opt/hadoop/share/hadoop/hdfs/lib/guava*-jre.jar /opt/hive/lib/
-
-}
-
 function installMysql {
 	echo "installing mysql"
 
@@ -64,9 +50,27 @@ function setupMysql {
     rm /root/admin-user.sql 
 }
 
+
+function setupHive {
+	echo "seting up hive"
+
+	cp -f $RESOURCES_DIR/hive/config/*.xml /opt/hive/conf
+    sed -i "s/YOUR_IP/$LOCAL_IP/" /opt/hive/conf/hive-site.xml
+    sed -i "s/PW_FOR_HIVE/$MYSQL_HIVE_PASSWD/" /opt/hive/conf/hive-site.xml
+
+ 	cp -f $RESOURCES_DIR/hive/config/hive.sh /etc/profile.d
+
+    rm /opt/hive/lib/guava-19.0.jar
+    cp /opt/hadoop/share/hadoop/hdfs/lib/guava*-jre.jar /opt/hive/lib/
+
+    /opt/hive/bin/schematool --verbose -dbType mysql -initSchema
+
+}
+
+
 echo "setup hive"
 installHive
 installMysqlConnector
-setupHive
 installMysql
 setupMysql
+setupHive

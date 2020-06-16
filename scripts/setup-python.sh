@@ -25,6 +25,14 @@ function configureJupyter {
     chown vagrant:vagrant /home/vagrant/notebooks
 }
 
+function startJupyter {
+    cp $RESOURCES_DIR/jupyter/service/* /etc/systemd/system/
+    systemctl enable jupyter.service
+    systemctl daemon-reload
+    systemctl start jupyter.service
+}
+
 echo "setup python"
 installPythonPackages
 configureJupyter
+startJupyter
