@@ -26,13 +26,43 @@ function configureJupyter {
 }
 
 function startJupyter {
+    echo "starting jupyter service"
     cp $RESOURCES_DIR/jupyter/service/* /etc/systemd/system/
     systemctl enable jupyter.service
     systemctl daemon-reload
     systemctl start jupyter.service
 }
 
+function installSparkMagic {
+    echo "installing sparkmagic"
+
+    apt install -y libkrb5-dev
+    pip3 install sparkmagic
+}
+
+function installNodeJS {
+    echo "installing nodejs"
+
+    apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+    apt update
+    apt -y install gcc g++ make
+    apt -y install nodejs
+}
+
+function setupSparkMagic {
+    echo "setting up sparkmagic"
+
+    jupyter labextension install "@jupyter-widgets/jupyterlab-manager"
+    cd /usr/local/lib/python3.6/dist-packages
+    jupyter-kernelspec install sparkmagic/kernels/pysparkkernel
+}
+
+
 echo "setup python"
 installPythonPackages
 configureJupyter
 startJupyter
+installSparkMagic
+installNodeJS
+setupSparkMagic

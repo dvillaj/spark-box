@@ -17,4 +17,4 @@
 jupyter lab \
     --no-browser \
     --notebook-dir=/home/vagrant/notebooks \
-    --port 8001
+    --port 8888

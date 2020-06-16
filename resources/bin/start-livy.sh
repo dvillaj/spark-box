@@ -1,0 +1,1 @@
+/opt/livy/bin/livy-server start

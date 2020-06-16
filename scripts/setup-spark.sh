@@ -4,11 +4,11 @@ source "/vagrant/scripts/common.sh"
 
 function installSpark {
 	echo "installing spark"
-
+    
     wget -q https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${SPARK_HADOOP_VERSION}.tgz
     tar -C /opt -xzf spark-${SPARK_VERSION}-bin-hadoop${SPARK_HADOOP_VERSION}.tgz
     ln -s /opt/spark-${SPARK_VERSION}-bin-hadoop${SPARK_HADOOP_VERSION} /opt/spark
-    rm spark-${SPARK_VERSION}-bin-hadoop${SPARK_HADOOP_VERSION}.tgz
+    rm spark-${SPARK_VERSION}-bin-hadoop${SPARK_HADOOP_VERSION}.tgz  
 }
 
 function setupSpark {
@@ -18,9 +18,6 @@ function setupSpark {
     cp /opt/hadoop/etc/hadoop/hdfs-site.xml /opt/spark/conf/
 
     cp $RESOURCES_DIR/spark/config/* /opt/spark/conf
-    sed -i "s/YOUR_IP/$LOCAL_IP/" /opt/spark/conf/hive-site.xml
-
-
 	cp -f $RESOURCES_DIR/spark/config/spark.sh /etc/profile.d
 }
 
