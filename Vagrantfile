@@ -57,4 +57,6 @@ yarn jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar 
 beeline -u jdbc:hive2://localhost:10000/
 
 https://becominghuman.ai/setting-up-a-scalable-data-exploration-environment-with-spark-and-jupyter-lab-22dbe7046269
+
+
 =end

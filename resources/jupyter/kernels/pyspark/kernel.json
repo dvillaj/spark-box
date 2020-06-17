@@ -1,0 +1,12 @@
+{
+"argv": [
+    "python",
+    "-m",
+    "ipykernel_launcher",
+    "-f",
+    "{connection_file}",
+    "--profile", "pyspark"
+],
+"display_name": "PySpark",
+"language": "pyspark"
+}
