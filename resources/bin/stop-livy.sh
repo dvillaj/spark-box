@@ -1,1 +1,0 @@
-/opt/livy/bin/livy-server stop

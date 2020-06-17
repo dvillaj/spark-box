@@ -34,7 +34,6 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 8888, host: 8888, id: 'jupyter'
   config.vm.network :forwarded_port, guest: 7077, host: 7077, id: 'spark-app'
   config.vm.network :forwarded_port, guest: 8080, host: 8080, id: 'spark-ui'
-  config.vm.network :forwarded_port, guest: 8998, host: 8998, id: 'livy'
 
   config.vm.network :forwarded_port, guest: 3306, host: 3306, id: 'mysql'
   config.vm.network :forwarded_port, guest: 10002, host: 10002, id: 'hive'
@@ -46,7 +45,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "scripts/setup-docker.sh"
   config.vm.provision "shell", path: "scripts/setup-spark.sh"
   config.vm.provision "shell", path: "scripts/setup-python.sh"
-  #config.vm.provision "shell", path: "scripts/setup-livy.sh"
   config.vm.provision "shell", path: "scripts/setup-common.sh"
 
 end
@@ -54,9 +52,7 @@ end
 
 =begin
 yarn jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar pi 2 100
-beeline -u jdbc:hive2://localhost:10000/
+beeline -u jdbc:hive2://localhost:10000
 
-https://becominghuman.ai/setting-up-a-scalable-data-exploration-environment-with-spark-and-jupyter-lab-22dbe7046269
-
-
+pyspark --master spark://localhost:7077
 =end
