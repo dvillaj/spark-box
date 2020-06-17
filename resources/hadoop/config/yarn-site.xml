@@ -20,4 +20,8 @@
 	<name>yarn.scheduler.minimum-allocation-mb</name>
 	<value>4096</value>
     </property>
+    <property>
+	<name>yarn.web-proxy.address</name>
+	<value>0.0.0.0:9046</value>
+    </property>
 </configuration>

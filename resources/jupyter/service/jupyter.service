@@ -1,0 +1,15 @@
+[Unit]
+Description=Jupyter Notebook
+
+[Service]
+Type=simple
+PIDFile=/run/jupyter.pid
+ExecStart=/bin/bash -c ". /usr/local/bin/start-jupyter.sh"
+User=vagrant
+Group=vagrant
+WorkingDirectory=/home/vagrant
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

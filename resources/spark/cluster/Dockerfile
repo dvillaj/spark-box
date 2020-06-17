@@ -14,6 +14,11 @@ RUN wget -q https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-$
  && ln -s /spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} /spark
 
 ENV SPARK_HOME=/spark
-ENV PYSPARK_DRIVER_PYTHON ipython
+#ENV PYSPARK_DRIVER_PYTHON=ipython
+#export PYSPARK_PYTHON=/usr/bin/python
+#export PYSPARK_DRIVER_PYTHON=/usr/bin/python
+#export PYSPARK3_PYTHON=/usr/bin/python3
+#export PYSPARK3_DRIVER_PYTHON=/usr/bin/python3
+#export SPARK_MASTER_OPTS="-Dspark.deploy.defaultCores=4"
 
 EXPOSE 8080 7077

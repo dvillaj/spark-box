@@ -8,5 +8,14 @@ function installBinaries {
     chmod a+x /usr/local/bin/*.sh
 }
 
+function updateSystem {
+    echo "update system"
+
+    apt update
+    apt upgrade -y
+    #reboot
+}
+
 echo "setup common"
 installBinaries
+updateSystem
