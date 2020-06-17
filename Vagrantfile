@@ -45,8 +45,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "scripts/setup-hive.sh"
   config.vm.provision "shell", path: "scripts/setup-docker.sh"
   config.vm.provision "shell", path: "scripts/setup-spark.sh"
-  config.vm.provision "shell", path: "scripts/setup-livy.sh"
   config.vm.provision "shell", path: "scripts/setup-python.sh"
+  #config.vm.provision "shell", path: "scripts/setup-livy.sh"
   config.vm.provision "shell", path: "scripts/setup-common.sh"
 
 end
