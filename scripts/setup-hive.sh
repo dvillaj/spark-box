@@ -56,6 +56,7 @@ function setupHive {
 
 	cp -f $RESOURCES_DIR/hive/config/*.xml /opt/hive/conf
     sed -i "s/PW_FOR_HIVE/$MYSQL_HIVE_PASSWD/" /opt/hive/conf/hive-site.xml
+    sed -i "s/YOUR_IP/$LOCAL_IP/" /opt/hive/conf/hive-site.xml
 
  	cp -f $RESOURCES_DIR/hive/config/hive.sh /etc/profile.d
 

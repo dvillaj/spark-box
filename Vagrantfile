@@ -52,7 +52,7 @@ end
 
 =begin
 yarn jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar pi 2 100
-beeline -u jdbc:hive2://localhost:10000
+beeline -u jdbc:hive2://10.0.2.15:10000
 
 pyspark --master spark://localhost:7077
 =end

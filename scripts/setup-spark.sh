@@ -18,6 +18,8 @@ function setupSpark {
     cp /opt/hadoop/etc/hadoop/hdfs-site.xml /opt/spark/conf/
 
     cp $RESOURCES_DIR/spark/config/* /opt/spark/conf
+    sed -i "s/YOUR_IP/$LOCAL_IP/" /opt/spark/conf/hive-site.xml
+    
 	cp -f $RESOURCES_DIR/spark/config/spark.sh /etc/profile.d
 }
 

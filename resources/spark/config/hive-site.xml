@@ -1,10 +1,10 @@
 <configuration>
         <property>
                 <name>hive.metastore.uris</name>
-                <value>thrift://localhost:9083</value>
+                <value>thrift://YOUR_IP:9083</value>
         </property>
         <property>
                 <name>spark.sql.warehouse.dir</name>
-                <value>hdfs://localhost:9000/user/hive/warehouse</value>
+                <value>hdfs://YOUR_IP:9000/user/hive/warehouse</value>
         </property>
 </configuration>

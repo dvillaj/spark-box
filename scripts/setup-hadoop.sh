@@ -39,6 +39,7 @@ function setupHadoop {
 	echo "seting up hadoop"
 
 	cp -f $RESOURCES_DIR/hadoop/config/*.xml /opt/hadoop/etc/hadoop
+	sed -i "s/YOUR_IP/$LOCAL_IP/" /etc/hadoop/core-site.xml
 
 	echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
 

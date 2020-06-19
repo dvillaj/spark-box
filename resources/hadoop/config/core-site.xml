@@ -6,7 +6,7 @@
     </property>
     <property>
 	<name>fs.defaultFS </name>
-	<value>hdfs://localhost:9000</value>
+	<value>hdfs://YOUR_IP:9000</value>
 	<description>The name of the default file system. </description>
 	</property>
 </configuration>
