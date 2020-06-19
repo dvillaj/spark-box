@@ -8,7 +8,7 @@ function installPythonPackages {
     apt update
     apt install -y python3-pip default-libmysqlclient-dev
 
-    pip3 install jupyterlab pandas ipython-sql mysqlclient matplotlib pyspark==${SPARK_VERSION}
+    pip3 install jupyterlab pandas ipython-sql mysqlclient matplotlib pyspark==${SPARK_VERSION} findspark
 }
 
 function configureJupyter {
@@ -22,9 +22,42 @@ function configureJupyter {
 
     mkdir -p /home/vagrant/notebooks
     cp $RESOURCES_DIR/notebooks/* /home/vagrant/notebooks
-    chown vagrant:vagrant /home/vagrant/notebooks
+    chown -R vagrant:vagrant /home/vagrant/notebooks
 }
+
+function startJupyter {
+    echo "starting jupyter service"
+    cp $RESOURCES_DIR/jupyter/service/* /etc/systemd/system/
+    systemctl enable jupyter.service
+    systemctl daemon-reload
+    systemctl start jupyter.service
+}
+
+function installToree {
+    pip3 install toree
+    jupyter toree install --spark_home=/opt/spark
+}
+
+function installPySparkKernel {
+    mkdir -p /usr/local/share/jupyter/kernels/pyspark
+
+    cp $RESOURCES_DIR/jupyter/kernels/pyspark/kernel.json /usr/local/share/jupyter/kernels/pyspark
+    mkdir -p /home/vagrant/.ipython/profile_pyspark/startup
+    cp $RESOURCES_DIR/jupyter/kernels/pyspark/*.py /home/vagrant/.ipython/profile_pyspark/startup
+    chown -R vagrant:vagrant /home/vagrant/.ipython
+}
+
+function setupPython {
+    echo "setting up python"
+
+    sudo ln -s /usr/bin/python3 /usr/bin/python
+}
+
 
 echo "setup python"
 installPythonPackages
 configureJupyter
+startJupyter
+installToree
+installPySparkKernel
+setupPython
