@@ -6,8 +6,8 @@ services:
     image: dvillaj/spark
     build:
       context: .
-      args:
-        SPARK_VERSION: 2.4.5
+      # args:
+      #  SPARK_VERSION: 2.4.5
     container_name: spark-master
     hostname: spark-master
     command: >

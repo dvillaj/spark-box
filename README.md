@@ -32,7 +32,7 @@ vagrant ssh
 ## Start Services 
 
 ```
-init-all.sh
+start-all-services.sh
 ```
 
 ## Integration Test
