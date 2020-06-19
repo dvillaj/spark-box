@@ -16,9 +16,11 @@ function generateSshKeys {
 }
 
 function installHadoop {
-	echo "installing hadoop"
-
+	echo "downloading hadoop"
 	wget -q https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz
+
+
+	echo "installing hadoop"
 	tar -C /opt -xzf hadoop-${HADOOP_VERSION}.tar.gz
 	ln -s  /opt/hadoop-${HADOOP_VERSION} /opt/hadoop 
 	ln -s  /opt/hadoop/etc/hadoop /etc/hadoop

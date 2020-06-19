@@ -3,9 +3,11 @@ source "/vagrant/scripts/common.sh"
 
 
 function installHive {
-	echo "installing hive"
-
+	echo "downloading hive"
     wget -q https://downloads.apache.org/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz
+
+
+	echo "installing hive"
     tar -C /opt -xzf apache-hive-${HIVE_VERSION}-bin.tar.gz
     ln -s /opt/apache-hive-${HIVE_VERSION}-bin /opt/hive
     rm apache-hive-${HIVE_VERSION}-bin.tar.gz 
