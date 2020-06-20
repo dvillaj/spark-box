@@ -3,6 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
   config.vm.box_check_update = false
   config.vm.hostname = "bigdata-master"
+  config.disksize.size = '25GB'
 
   config.vm.provider "virtualbox" do |vm|
     vm.name = "Spark Box"
@@ -32,21 +33,21 @@ Vagrant.configure("2") do |config|
 
   # Ports Spark
   config.vm.network :forwarded_port, guest: 8888, host: 8888, id: 'jupyter'
-  config.vm.network :forwarded_port, guest: 7077, host: 7077, id: 'spark-app'
-  config.vm.network :forwarded_port, guest: 8080, host: 8080, id: 'spark-ui'
+  config.vm.network :forwarded_port, guest: 8080, host: 8080, id: 'spark'
 
   config.vm.network :forwarded_port, guest: 3306, host: 3306, id: 'mysql'
+  config.vm.network :forwarded_port, guest: 27017, host: 27017, id: 'mongo'
   config.vm.network :forwarded_port, guest: 10002, host: 10002, id: 'hive'
   config.vm.network :forwarded_port, guest: 22, host: 2244, id: 'ssh'
-  #config.vm.network :forwarded_port, guest: 8998, host: 8998, id: 'livy'
 
 
   config.vm.provision "shell", path: "scripts/setup-hadoop.sh"
   config.vm.provision "shell", path: "scripts/setup-hive.sh"
+  config.vm.provision "shell", path: "scripts/setup-flume.sh"
+  config.vm.provision "shell", path: "scripts/setup-mongo.sh"
   config.vm.provision "shell", path: "scripts/setup-docker.sh"
   config.vm.provision "shell", path: "scripts/setup-spark.sh"
   config.vm.provision "shell", path: "scripts/setup-python.sh"
-  #config.vm.provision "shell", path: "scripts/setup-livy.sh"
   config.vm.provision "shell", path: "scripts/setup-common.sh"
 
 end
@@ -60,4 +61,6 @@ beeline -u jdbc:hive2://10.0.2.15:10000
 
 
 pyspark --master spark://localhost:7077
+
+https://github.com/simplesteph/kafka-stack-docker-compose
 =end

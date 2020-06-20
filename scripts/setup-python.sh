@@ -50,7 +50,7 @@ function installPySparkKernel {
 function setupPython {
     echo "setting up python"
 
-    sudo ln -s /usr/bin/python3 /usr/bin/python
+    ln -s /usr/bin/python3 /usr/bin/python
 }
 
 

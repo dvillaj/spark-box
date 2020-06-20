@@ -2,6 +2,10 @@
 
 Automatization of "Building your Own Big Data Infrastructure for Data Science" article written by [Ashton Sidhu](https://towardsdatascience.com/tutorial-building-your-own-big-data-infrastructure-for-data-science-579ae46880d8)
 
+# Requirements
+
+- vagrant
+- vagrant plugin vagrant-disksize
 
 ## Software 
 
@@ -20,6 +24,7 @@ The build process uses Vagrant to create a virtual machine with Ubuntu 18.10 and
 ## Build the box
 
 ```
+vagrant plugin install vagrant-disksize
 vagrant up
 ```
 
@@ -33,6 +38,13 @@ vagrant ssh
 
 ```
 start-all-services.sh
+```
+
+
+## Stop Services 
+
+```
+stop-all-services.sh
 ```
 
 ## Integration Test
