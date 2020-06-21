@@ -24,6 +24,13 @@ function stopSpark {
     popd > /dev/null
 }
 
+function stopZookeeper {
+    echo "Stoping zookeper ..."
+
+    zkServer.sh stop
+}
+
+stopZookeeper
 stopSpark
 stopHive
 stopHadoop

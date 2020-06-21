@@ -13,6 +13,8 @@ function installFlume {
     rm apache-flume-${FLUME_VERSION}-bin.tar.gz
 
     chown -R vagrant:vagrant /opt/apache-flume-${FLUME_VERSION}-bin 
+
+	ln -s  /opt/flume/conf /etc/flume
 }
 
 function setupFlume {

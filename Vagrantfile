@@ -47,6 +47,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "scripts/setup-mongo.sh"
   config.vm.provision "shell", path: "scripts/setup-docker.sh"
   config.vm.provision "shell", path: "scripts/setup-spark.sh"
+  config.vm.provision "shell", path: "scripts/setup-kafka.sh"
   config.vm.provision "shell", path: "scripts/setup-python.sh"
   config.vm.provision "shell", path: "scripts/setup-common.sh"
 
@@ -63,4 +64,8 @@ beeline -u jdbc:hive2://10.0.2.15:10000
 pyspark --master spark://localhost:7077
 
 https://github.com/simplesteph/kafka-stack-docker-compose
+
+https://tecadmin.net/install-apache-kafka-ubuntu/
+https://www.howtoforge.com/how-to-setup-apache-zookeeper-cluster-on-ubuntu-1804/
+https://medium.com/@kekayan/a-guide-to-kafka-clustering-in-ubuntu-18-04-5eac0eaf08a2
 =end

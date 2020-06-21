@@ -18,6 +18,9 @@ The build process uses Vagrant to create a virtual machine with Ubuntu 18.10 and
 - [Spark](http://localhost:8080)
 - MySQL
 - [Jupyter Lab](http://localhost:8888)
+- MongoDB
+- Flume
+- Zookeeper
 - Docker
 
 

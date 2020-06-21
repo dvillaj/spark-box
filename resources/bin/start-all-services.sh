@@ -25,6 +25,13 @@ function startSpark {
     popd > /dev/null
 }
 
+function startZookeeper {
+    echo "Starting zookeper ..."
+
+    zkServer.sh start
+}
+
 startHadoop
 startHive
 startSpark
+startZookeeper

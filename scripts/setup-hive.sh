@@ -67,6 +67,7 @@ function setupHive {
 
     /opt/hive/bin/schematool --verbose -dbType mysql -initSchema
 
+   	ln -s  /opt/hive/conf /etc/hive
 }
 
 
