@@ -29,6 +29,7 @@ The build process uses Vagrant to create a virtual machine with Ubuntu 18.10 and
 ```
 vagrant plugin install vagrant-disksize
 vagrant up
+vagrant reload
 ```
 
 ## Logging into the box

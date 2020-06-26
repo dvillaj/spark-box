@@ -11,7 +11,7 @@ function installPythonPackages {
     pip3 install jupyterlab pandas ipython-sql mysqlclient matplotlib pyspark==${SPARK_VERSION} findspark
 }
 
-function install nodejs {
+function installNodejs {
     echo "installing nodejs"
 
     apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
@@ -20,7 +20,8 @@ function install nodejs {
     sudo apt -y install nodejs
 }
 
-function install jupyterExtensions {
+function installJupyterExtensions {
+    echo "install jypyter extensions"
     pip3 install plotly
     jupyter labextension install jupyterlab-plotly
 }
@@ -75,3 +76,5 @@ startJupyter
 installToree
 installPySparkKernel
 setupPython
+installNodejs
+installJupyterExtensions
