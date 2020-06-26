@@ -60,6 +60,8 @@ beeline -u jdbc:hive2://10.211.55.101:10000
 
 beeline -u jdbc:hive2://10.0.2.15:10000
 
+zkCli.sh -server 127.0.0.1:2181
+
 
 pyspark --master spark://localhost:7077
 
